@@ -1,4 +1,4 @@
-# CSS3 Avançado: Flexbox & Grid - Apresentação Interativa
+# CSS3 Avançado: Flexbox & Grid
 
 Uma apresentação web interativa e moderna sobre CSS3 Flexbox e Grid Layout, desenvolvida com HTML5, CSS3 e JavaScript vanilla.
 
