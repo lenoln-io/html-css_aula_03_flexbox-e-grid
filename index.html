@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS3: Flexbox e Grid - Material Interativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              pastel: {
+                blue: "#E6F3FF",
+                purple: "#F0E6FF",
+                pink: "#FFE6F3",
+                green: "#E6FFE6",
+                yellow: "#FFF9E6",
+                orange: "#FFE6D9",
+              },
+            },
+            fontFamily: {
+              inter: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body
+    class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen font-inter"
+  >
+    <!-- Progress Bar -->
+    <div class="fixed top-0 left-0 w-full h-1 bg-slate-200 z-50">
+      <div
+        id="progressBar"
+        class="h-full bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"
+        style="width: 8.33%"
+      ></div>
+    </div>
+
+    <!-- Slide Counter -->
+    <div
+      class="fixed top-6 right-6 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-slate-600 z-40"
+    >
+      <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
+    </div>
+
+    <!-- Main Container -->
+    <div class="min-h-screen flex items-center justify-center p-4">
+      <div class="w-full max-w-5xl">
+        <!-- Slide 1: Título -->
+        <div
+          class="slide active bg-white rounded-3xl shadow-xl p-12 text-center slide-enter"
+        >
+          <div class="mb-8">
+            <div
+              class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl mb-6"
+            >
+              <span class="text-3xl">🎨</span>
+            </div>
+            <h1 class="text-4xl font-bold text-slate-800 mb-4">
+              CSS3 Avançado
+            </h1>
+            <h2 class="text-2xl font-medium text-slate-600 mb-8">
+              Flexbox & CSS Grid
+            </h2>
+          </div>
+
+          <div class="bg-pastel-blue rounded-2xl p-8 max-w-2xl mx-auto">
+            <h3 class="text-lg font-semibold text-slate-700 mb-4">
+              🎯 Objetivos da Aula
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
+              <div class="flex items-start space-x-3">
+                <div
+                  class="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"
+                ></div>
+                <span class="text-slate-600">Dominar layouts flexíveis</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div
+                  class="w-2 h-2 bg-purple-400 rounded-full mt-2 flex-shrink-0"
+                ></div>
+                <span class="text-slate-600">Layouts bidimensionais</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div
+                  class="w-2 h-2 bg-pink-400 rounded-full mt-2 flex-shrink-0"
+                ></div>
+                <span class="text-slate-600">Design responsivo</span>
+              </div>
+              <div class="flex items-start space-x-3">
+                <div
+                  class="w-2 h-2 bg-green-400 rounded-full mt-2 flex-shrink-0"
+                ></div>
+                <span class="text-slate-600">Boas práticas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2: O que é Flexbox -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">🔧</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">O que é Flexbox?</h2>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div>
+              <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                <strong class="text-slate-800">Flexbox</strong> é um sistema de
+                layout unidimensional que organiza elementos de forma flexível e
+                intuitiva.
+              </p>
+
+              <div class="bg-pastel-green rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  ✨ Principais Vantagens
+                </h3>
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span class="text-slate-600">Alinhamento intuitivo</span>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span class="text-slate-600">Distribuição automática</span>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    <span class="text-slate-600">Responsivo por natureza</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="bg-slate-50 rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  💡 Exemplo Prático
+                </h3>
+                <div class="flex gap-3 mb-4">
+                  <div
+                    class="flex-1 bg-gradient-to-r from-blue-400 to-blue-500 text-white p-4 rounded-xl text-center font-medium"
+                  >
+                    Item 1
+                  </div>
+                  <div
+                    class="flex-1 bg-gradient-to-r from-purple-400 to-purple-500 text-white p-4 rounded-xl text-center font-medium"
+                  >
+                    Item 2
+                  </div>
+                  <div
+                    class="flex-1 bg-gradient-to-r from-pink-400 to-pink-500 text-white p-4 rounded-xl text-center font-medium"
+                  >
+                    Item 3
+                  </div>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-4 text-sm">
+                  <code class="text-green-400">display: flex;</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3: Conceitos Fundamentais -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">📐</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">
+              Conceitos Fundamentais
+            </h2>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div class="space-y-6">
+              <div class="bg-pastel-purple rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4 flex items-center">
+                  <span class="mr-2">🎯</span> Eixos do Flexbox
+                </h3>
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center">
+                    <span class="font-medium text-slate-600">Main Axis</span>
+                    <span class="text-sm bg-white px-3 py-1 rounded-full"
+                      >Eixo principal</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="font-medium text-slate-600">Cross Axis</span>
+                    <span class="text-sm bg-white px-3 py-1 rounded-full"
+                      >Eixo transversal</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-pastel-blue rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4 flex items-center">
+                  <span class="mr-2">📦</span> Elementos
+                </h3>
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center">
+                    <span class="font-medium text-slate-600">Container</span>
+                    <span class="text-sm bg-white px-3 py-1 rounded-full"
+                      >Elemento pai</span
+                    >
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="font-medium text-slate-600">Items</span>
+                    <span class="text-sm bg-white px-3 py-1 rounded-full"
+                      >Elementos filhos</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="bg-slate-900 rounded-2xl p-6 text-white">
+                <div class="flex items-center mb-4">
+                  <div class="w-3 h-3 bg-red-400 rounded-full mr-2"></div>
+                  <div class="w-3 h-3 bg-yellow-400 rounded-full mr-2"></div>
+                  <div class="w-3 h-3 bg-green-400 rounded-full mr-4"></div>
+                  <span class="text-sm text-slate-400">styles.css</span>
+                </div>
+                <pre
+                  class="text-sm leading-relaxed"
+                ><code><span class="text-blue-400">.container</span> {
+  <span class="text-green-400">display</span>: <span class="text-yellow-400">flex</span>;
+  <span class="text-gray-400">/* Torna o elemento um flex container */</span>
+}
+
+<span class="text-blue-400">.item</span> {
+  <span class="text-gray-400">/* Automaticamente vira flex item */</span>
+  <span class="text-green-400">flex</span>: <span class="text-yellow-400">1</span>;
+}</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4: Propriedades do Container -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">🎛️</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">
+              Propriedades do Container
+            </h2>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-slate-900 rounded-2xl p-6 text-white">
+              <pre
+                class="text-sm leading-relaxed"
+              ><code><span class="text-blue-400">.flex-container</span> {
+  <span class="text-green-400">display</span>: <span class="text-yellow-400">flex</span>;
+  <span class="text-green-400">flex-direction</span>: <span class="text-yellow-400">row</span> | <span class="text-yellow-400">column</span> | <span class="text-yellow-400">row-reverse</span>;
+  <span class="text-green-400">justify-content</span>: <span class="text-yellow-400">center</span> | <span class="text-yellow-400">space-between</span> | <span class="text-yellow-400">space-around</span>;
+  <span class="text-green-400">align-items</span>: <span class="text-yellow-400">center</span> | <span class="text-yellow-400">flex-start</span> | <span class="text-yellow-400">flex-end</span>;
+  <span class="text-green-400">gap</span>: <span class="text-yellow-400">1rem</span>;
+}</code></pre>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-pastel-blue rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">🧭 Direção</h3>
+                <div class="space-y-2 text-sm">
+                  <div class="bg-white p-2 rounded-lg">
+                    <code class="text-blue-600">row</code> - Horizontal →
+                  </div>
+                  <div class="bg-white p-2 rounded-lg">
+                    <code class="text-blue-600">column</code> - Vertical ↓
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-pastel-green rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  📏 Alinhamento
+                </h3>
+                <div class="space-y-2 text-sm">
+                  <div class="bg-white p-2 rounded-lg">
+                    <code class="text-green-600">center</code> - Centro
+                  </div>
+                  <div class="bg-white p-2 rounded-lg">
+                    <code class="text-green-600">space-between</code> - Espaçado
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-pastel-purple rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">🎯 Quebra</h3>
+                <div class="space-y-2 text-sm">
+                  <div class="bg-white p-2 rounded-lg">
+                    <code class="text-purple-600">nowrap</code> - Sem quebra
+                  </div>
+                  <div class="bg-white p-2 rounded-lg">
+                    <code class="text-purple-600">wrap</code> - Com quebra
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5: Propriedades dos Itens -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-pink-100 to-pink-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">🎯</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">
+              Propriedades dos Itens
+            </h2>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div>
+              <div class="bg-slate-900 rounded-2xl p-6 text-white mb-6">
+                <pre
+                  class="text-sm leading-relaxed"
+                ><code><span class="text-blue-400">.flex-item</span> {
+  <span class="text-green-400">flex-grow</span>: <span class="text-yellow-400">1</span>;     <span class="text-gray-400">/* Cresce */</span>
+  <span class="text-green-400">flex-shrink</span>: <span class="text-yellow-400">1</span>;   <span class="text-gray-400">/* Encolhe */</span>
+  <span class="text-green-400">flex-basis</span>: <span class="text-yellow-400">auto</span>; <span class="text-gray-400">/* Base */</span>
+  
+  <span class="text-green-400">flex</span>: <span class="text-yellow-400">1 1 auto</span>;   <span class="text-gray-400">/* Shorthand */</span>
+  <span class="text-green-400">align-self</span>: <span class="text-yellow-400">center</span>;
+  <span class="text-green-400">order</span>: <span class="text-yellow-400">0</span>;
+}</code></pre>
+              </div>
+
+              <div class="bg-pastel-pink rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  💡 Dica Importante
+                </h3>
+                <p class="text-slate-600 text-sm">
+                  Use
+                  <code class="bg-white px-2 py-1 rounded text-pink-600"
+                    >flex: 1</code
+                  >
+                  para distribuição igual entre itens.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div class="bg-slate-50 rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  🔍 Demonstração - Flex Grow
+                </h3>
+                <div class="flex gap-3 mb-4">
+                  <div
+                    class="bg-gradient-to-r from-blue-400 to-blue-500 text-white p-4 rounded-xl text-center text-sm font-medium"
+                    style="flex-grow: 1"
+                  >
+                    grow: 1
+                  </div>
+                  <div
+                    class="bg-gradient-to-r from-purple-400 to-purple-500 text-white p-4 rounded-xl text-center text-sm font-medium"
+                    style="flex-grow: 2"
+                  >
+                    grow: 2
+                  </div>
+                  <div
+                    class="bg-gradient-to-r from-pink-400 to-pink-500 text-white p-4 rounded-xl text-center text-sm font-medium"
+                    style="flex-grow: 1"
+                  >
+                    grow: 1
+                  </div>
+                </div>
+                <p class="text-xs text-slate-500">
+                  O item do meio ocupa o dobro do espaço
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6: Display e Visibility -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">👁️</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">
+              Display e Visibility
+            </h2>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border border-slate-200">
+            <table class="w-full">
+              <thead class="bg-gradient-to-r from-slate-50 to-slate-100">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold text-slate-700">
+                    Propriedade
+                  </th>
+                  <th class="px-6 py-4 text-left font-semibold text-slate-700">
+                    Valores
+                  </th>
+                  <th class="px-6 py-4 text-left font-semibold text-slate-700">
+                    Comportamento
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-slate-800">display</td>
+                  <td class="px-6 py-4">
+                    <div class="flex flex-wrap gap-2">
+                      <span
+                        class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-sm"
+                        >none</span
+                      >
+                      <span
+                        class="bg-green-100 text-green-700 px-2 py-1 rounded text-sm"
+                        >flex</span
+                      >
+                      <span
+                        class="bg-purple-100 text-purple-700 px-2 py-1 rounded text-sm"
+                        >grid</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Remove do layout ou define tipo
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-slate-800">
+                    visibility
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex flex-wrap gap-2">
+                      <span
+                        class="bg-green-100 text-green-700 px-2 py-1 rounded text-sm"
+                        >visible</span
+                      >
+                      <span
+                        class="bg-red-100 text-red-700 px-2 py-1 rounded text-sm"
+                        >hidden</span
+                      >
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Oculta mas mantém espaço
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-slate-800">opacity</td>
+                  <td class="px-6 py-4">
+                    <span
+                      class="bg-gray-100 text-gray-700 px-2 py-1 rounded text-sm"
+                      >0 a 1</span
+                    >
+                  </td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Controla transparência
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-6 bg-pastel-yellow rounded-2xl p-6">
+            <div class="flex items-start space-x-3">
+              <span class="text-2xl">💡</span>
+              <div>
+                <h3 class="font-semibold text-slate-700 mb-2">Dica Prática</h3>
+                <p class="text-slate-600">
+                  Use
+                  <code class="bg-white px-2 py-1 rounded">display: none</code>
+                  para remover completamente,
+                  <code class="bg-white px-2 py-1 rounded"
+                    >visibility: hidden</code
+                  >
+                  para ocultar mantendo o espaço.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 7: Introdução ao CSS Grid -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-indigo-100 to-indigo-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">🏗️</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">CSS Grid</h2>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div>
+              <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                <strong class="text-slate-800">CSS Grid</strong> é um sistema
+                bidimensional para criar layouts complexos com controle preciso.
+              </p>
+
+              <div class="bg-pastel-blue rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  🎯 Quando Usar Grid
+                </h3>
+                <div class="space-y-3">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <span class="text-slate-600"
+                      >Layouts de página completos</span
+                    >
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <span class="text-slate-600"
+                      >Designs com áreas definidas</span
+                    >
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <span class="text-slate-600">Galerias e dashboards</span>
+                  </div>
+                  <div class="flex items-center space-x-3">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    <span class="text-slate-600"
+                      >Layouts responsivos complexos</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="bg-slate-50 rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  💡 Exemplo Visual
+                </h3>
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                  <div
+                    class="col-span-3 bg-gradient-to-r from-indigo-400 to-indigo-500 text-white p-3 rounded-lg text-center text-sm font-medium"
+                  >
+                    Header
+                  </div>
+                  <div
+                    class="bg-gradient-to-r from-purple-400 to-purple-500 text-white p-3 rounded-lg text-center text-sm font-medium"
+                  >
+                    Nav
+                  </div>
+                  <div
+                    class="bg-gradient-to-r from-blue-400 to-blue-500 text-white p-3 rounded-lg text-center text-sm font-medium"
+                  >
+                    Main
+                  </div>
+                  <div
+                    class="bg-gradient-to-r from-pink-400 to-pink-500 text-white p-3 rounded-lg text-center text-sm font-medium"
+                  >
+                    Aside
+                  </div>
+                  <div
+                    class="col-span-3 bg-gradient-to-r from-green-400 to-green-500 text-white p-3 rounded-lg text-center text-sm font-medium"
+                  >
+                    Footer
+                  </div>
+                </div>
+                <div class="bg-slate-800 rounded-xl p-3 text-sm">
+                  <code class="text-green-400">display: grid;</code>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 8: Propriedades Básicas do Grid -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-teal-100 to-teal-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">⚙️</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">
+              Propriedades Básicas
+            </h2>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-slate-900 rounded-2xl p-6 text-white">
+              <pre
+                class="text-sm leading-relaxed"
+              ><code><span class="text-blue-400">.grid-container</span> {
+  <span class="text-green-400">display</span>: <span class="text-yellow-400">grid</span>;
+  <span class="text-green-400">grid-template-columns</span>: <span class="text-yellow-400">1fr 2fr 1fr</span>;
+  <span class="text-green-400">grid-template-rows</span>: <span class="text-yellow-400">auto 1fr auto</span>;
+  <span class="text-green-400">gap</span>: <span class="text-yellow-400">1rem</span>;
+  <span class="text-green-400">grid-template-areas</span>: 
+    <span class="text-yellow-400">"header header header"
+    "nav main aside"
+    "footer footer footer"</span>;
+}</code></pre>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="bg-pastel-green rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  📏 Definindo Estrutura
+                </h3>
+                <div class="space-y-3 text-sm">
+                  <div class="bg-white p-3 rounded-lg">
+                    <code class="text-green-600">grid-template-columns</code>
+                    <p class="text-slate-600 mt-1">
+                      Define largura das colunas
+                    </p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg">
+                    <code class="text-green-600">grid-template-rows</code>
+                    <p class="text-slate-600 mt-1">Define altura das linhas</p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg">
+                    <code class="text-green-600">gap</code>
+                    <p class="text-slate-600 mt-1">Espaçamento entre células</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-pastel-purple rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  🗺️ Áreas Nomeadas
+                </h3>
+                <div class="space-y-3 text-sm">
+                  <div class="bg-white p-3 rounded-lg">
+                    <code class="text-purple-600">grid-template-areas</code>
+                    <p class="text-slate-600 mt-1">Nomeia áreas do layout</p>
+                  </div>
+                  <div class="bg-white p-3 rounded-lg">
+                    <code class="text-purple-600">grid-area</code>
+                    <p class="text-slate-600 mt-1">Posiciona item em área</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 9: Posicionamento de Itens -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">📍</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">
+              Posicionamento de Itens
+            </h2>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div>
+              <div class="bg-slate-900 rounded-2xl p-6 text-white mb-6">
+                <pre
+                  class="text-sm leading-relaxed"
+                ><code><span class="text-blue-400">.grid-item</span> {
+  <span class="text-gray-400">/* Por números de linha */</span>
+  <span class="text-green-400">grid-column</span>: <span class="text-yellow-400">1 / 3</span>;
+  <span class="text-green-400">grid-row</span>: <span class="text-yellow-400">2 / 4</span>;
+  
+  <span class="text-gray-400">/* Por área nomeada */</span>
+  <span class="text-green-400">grid-area</span>: <span class="text-yellow-400">header</span>;
+  
+  <span class="text-gray-400">/* Por span */</span>
+  <span class="text-green-400">grid-column</span>: <span class="text-yellow-400">span 2</span>;
+}</code></pre>
+              </div>
+            </div>
+
+            <div>
+              <div class="bg-pastel-orange rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  🎯 Métodos de Posicionamento
+                </h3>
+                <div class="space-y-4">
+                  <div class="bg-white p-4 rounded-xl">
+                    <h4 class="font-medium text-slate-700 mb-2">Por Números</h4>
+                    <code class="text-sm text-orange-600"
+                      >grid-column: 1 / 3</code
+                    >
+                    <p class="text-xs text-slate-500 mt-1">
+                      Ocupa colunas 1 e 2
+                    </p>
+                  </div>
+                  <div class="bg-white p-4 rounded-xl">
+                    <h4 class="font-medium text-slate-700 mb-2">Por Áreas</h4>
+                    <code class="text-sm text-orange-600"
+                      >grid-area: header</code
+                    >
+                    <p class="text-xs text-slate-500 mt-1">Usa área nomeada</p>
+                  </div>
+                  <div class="bg-white p-4 rounded-xl">
+                    <h4 class="font-medium text-slate-700 mb-2">Por Span</h4>
+                    <code class="text-sm text-orange-600"
+                      >grid-column: span 2</code
+                    >
+                    <p class="text-xs text-slate-500 mt-1">Ocupa 2 colunas</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 10: Design Responsivo -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">📱</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">Design Responsivo</h2>
+          </div>
+
+          <div class="space-y-6">
+            <div class="bg-slate-900 rounded-2xl p-6 text-white">
+              <pre
+                class="text-sm leading-relaxed"
+              ><code><span class="text-gray-400">/* Mobile First */</span>
+<span class="text-blue-400">.container</span> {
+  <span class="text-green-400">display</span>: <span class="text-yellow-400">grid</span>;
+  <span class="text-green-400">grid-template-columns</span>: <span class="text-yellow-400">1fr</span>;
+  <span class="text-green-400">gap</span>: <span class="text-yellow-400">1rem</span>;
+}
+
+<span class="text-gray-400">/* Tablet */</span>
+<span class="text-purple-400">@media</span> (<span class="text-green-400">min-width</span>: <span class="text-yellow-400">768px</span>) {
+  <span class="text-blue-400">.container</span> {
+    <span class="text-green-400">grid-template-columns</span>: <span class="text-yellow-400">1fr 1fr</span>;
+  }
+}
+
+<span class="text-gray-400">/* Desktop */</span>
+<span class="text-purple-400">@media</span> (<span class="text-green-400">min-width</span>: <span class="text-yellow-400">1024px</span>) {
+  <span class="text-blue-400">.container</span> {
+    <span class="text-green-400">grid-template-columns</span>: <span class="text-yellow-400">1fr 2fr 1fr</span>;
+  }
+}</code></pre>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div
+                class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 text-center"
+              >
+                <div class="text-4xl mb-3">📱</div>
+                <h3 class="font-semibold text-slate-700 mb-2">Mobile</h3>
+                <p class="text-sm text-slate-600">1 coluna</p>
+                <div class="mt-4 bg-blue-200 h-16 rounded-lg"></div>
+              </div>
+              <div
+                class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 text-center"
+              >
+                <div class="text-4xl mb-3">📱</div>
+                <h3 class="font-semibold text-slate-700 mb-2">Tablet</h3>
+                <p class="text-sm text-slate-600">2 colunas</p>
+                <div class="mt-4 grid grid-cols-2 gap-2">
+                  <div class="bg-purple-200 h-8 rounded"></div>
+                  <div class="bg-purple-200 h-8 rounded"></div>
+                </div>
+              </div>
+              <div
+                class="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 text-center"
+              >
+                <div class="text-4xl mb-3">💻</div>
+                <h3 class="font-semibold text-slate-700 mb-2">Desktop</h3>
+                <p class="text-sm text-slate-600">3 colunas</p>
+                <div class="mt-4 grid grid-cols-3 gap-1">
+                  <div class="bg-green-200 h-6 rounded"></div>
+                  <div class="bg-green-300 h-6 rounded"></div>
+                  <div class="bg-green-200 h-6 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 11: Flexbox vs Grid -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-red-100 to-red-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">⚖️</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">Flexbox vs Grid</h2>
+          </div>
+
+          <div class="overflow-hidden rounded-2xl border border-slate-200 mb-6">
+            <table class="w-full">
+              <thead class="bg-gradient-to-r from-slate-50 to-slate-100">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold text-slate-700">
+                    Aspecto
+                  </th>
+                  <th class="px-6 py-4 text-left font-semibold text-slate-700">
+                    🔧 Flexbox
+                  </th>
+                  <th class="px-6 py-4 text-left font-semibold text-slate-700">
+                    🏗️ CSS Grid
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-slate-800">Dimensão</td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Unidimensional (linha OU coluna)
+                  </td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Bidimensional (linhas E colunas)
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-slate-800">
+                    Melhor para
+                  </td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Componentes, navegação
+                  </td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Layouts de página, grids
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-slate-800">
+                    Alinhamento
+                  </td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Excelente para centralização
+                  </td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Controle preciso de posição
+                  </td>
+                </tr>
+                <tr class="hover:bg-slate-50 transition-colors">
+                  <td class="px-6 py-4 font-medium text-slate-800">
+                    Flexibilidade
+                  </td>
+                  <td class="px-6 py-4 text-slate-600">Adapta ao conteúdo</td>
+                  <td class="px-6 py-4 text-slate-600">
+                    Estrutura fixa e previsível
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-6"
+          >
+            <div class="flex items-start space-x-3">
+              <span class="text-2xl">💡</span>
+              <div>
+                <h3 class="font-semibold text-slate-700 mb-2">
+                  Dica Profissional
+                </h3>
+                <p class="text-slate-600">
+                  Use Flexbox para componentes e Grid para layouts. Eles
+                  funcionam perfeitamente juntos!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 12: Boas Práticas -->
+        <div class="slide hidden bg-white rounded-3xl shadow-xl p-12">
+          <div class="flex items-center mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-xl flex items-center justify-center mr-4"
+            >
+              <span class="text-xl">✅</span>
+            </div>
+            <h2 class="text-3xl font-bold text-slate-800">Boas Práticas</h2>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div class="space-y-6">
+              <div class="bg-pastel-green rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4 flex items-center">
+                  <span class="mr-2">🚀</span> Performance
+                </h3>
+                <div class="space-y-3 text-sm">
+                  <div class="flex items-start space-x-3">
+                    <div
+                      class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"
+                    ></div>
+                    <span class="text-slate-600"
+                      >Evite layouts aninhados desnecessários</span
+                    >
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <div
+                      class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"
+                    ></div>
+                    <span class="text-slate-600"
+                      >Prefira
+                      <code class="bg-white px-1 rounded">transform</code> para
+                      animações</span
+                    >
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <div
+                      class="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"
+                    ></div>
+                    <span class="text-slate-600"
+                      >Minimize reflows e repaints</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-pastel-blue rounded-2xl p-6">
+                <h3 class="font-semibold text-slate-700 mb-4 flex items-center">
+                  <span class="mr-2">📐</span> Design Responsivo
+                </h3>
+                <div class="space-y-3 text-sm">
+                  <div class="flex items-start space-x-3">
+                    <div
+                      class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"
+                    ></div>
+                    <span class="text-slate-600">Sempre Mobile First</span>
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <div
+                      class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"
+                    ></div>
+                    <span class="text-slate-600"
+                      >Use unidades relativas (rem, em, %)</span
+                    >
+                  </div>
+                  <div class="flex items-start space-x-3">
+                    <div
+                      class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"
+                    ></div>
+                    <span class="text-slate-600"
+                      >Teste em dispositivos reais</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6"
+              >
+                <h3 class="font-semibold text-slate-700 mb-4">
+                  🎯 Quando Usar Cada Um
+                </h3>
+
+                <div class="space-y-4">
+                  <div class="bg-white rounded-xl p-4">
+                    <h4 class="font-medium text-purple-700 mb-3">
+                      🔧 Flexbox para:
+                    </h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                      <span
+                        class="bg-purple-100 text-purple-700 px-2 py-1 rounded"
+                        >Navegação</span
+                      >
+                      <span
+                        class="bg-purple-100 text-purple-700 px-2 py-1 rounded"
+                        >Botões</span
+                      >
+                      <span
+                        class="bg-purple-100 text-purple-700 px-2 py-1 rounded"
+                        >Centralização</span
+                      >
+                      <span
+                        class="bg-purple-100 text-purple-700 px-2 py-1 rounded"
+                        >Cards</span
+                      >
+                    </div>
+                  </div>
+
+                  <div class="bg-white rounded-xl p-4">
+                    <h4 class="font-medium text-pink-700 mb-3">
+                      🏗️ Grid para:
+                    </h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                      <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded"
+                        >Layout página</span
+                      >
+                      <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded"
+                        >Galerias</span
+                      >
+                      <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded"
+                        >Dashboards</span
+                      >
+                      <span class="bg-pink-100 text-pink-700 px-2 py-1 rounded"
+                        >Formulários</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8 text-center">
+            <div
+              class="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-full"
+            >
+              <span class="text-xl">🚀</span>
+              <span class="font-medium">Always keep learning !</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div
+      class="fixed bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-4 z-40"
+    >
+      <button
+        id="prevBtn"
+        onclick="changeSlide(-1)"
+        class="bg-white/90 backdrop-blur-sm hover:bg-white text-slate-700 px-6 py-3 rounded-full font-medium transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        ← Anterior
+      </button>
+      <button
+        id="nextBtn"
+        onclick="changeSlide(1)"
+        class="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-6 py-3 rounded-full font-medium transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Próximo →
+      </button>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

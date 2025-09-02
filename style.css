@@ -1,0 +1,19 @@
+body {
+	font-family: "Inter", system-ui, sans-serif;
+}
+.slide-enter {
+	animation: slideEnter 0.4s ease-out;
+}
+@keyframes slideEnter {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.code-highlight {
+	background: linear-gradient(90deg, #e6f3ff 0%, #f0e6ff 100%);
+}
